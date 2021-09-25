@@ -8,7 +8,7 @@ import java.util.concurrent.ConcurrentHashMap
 class InMemoryFoodOrderDatabase implements FoodOrderDatabase {
 
     private final ConcurrentHashMap<Long, FoodOrderDto> db
-            = new ConcurrentHashMap<>();
+            = new ConcurrentHashMap<>()
 
     @Override
     void save(FoodOrderDto foodOrderDto) {
@@ -17,6 +17,6 @@ class InMemoryFoodOrderDatabase implements FoodOrderDatabase {
 
     @Override
     FoodOrderDto findById(Long orderId) {
-        return db.get(orderId);
+        return db.get(orderId)
     }
 }
