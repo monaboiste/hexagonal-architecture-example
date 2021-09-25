@@ -1,4 +1,4 @@
-package domain
+package com.github.monaboiste.domain
 
 import com.github.monaboiste.domain.order.FoodOrderFacade
 import com.github.monaboiste.domain.order.port.incoming.FoodOrderService
