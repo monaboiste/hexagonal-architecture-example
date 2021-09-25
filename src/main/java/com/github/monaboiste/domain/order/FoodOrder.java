@@ -46,7 +46,6 @@ class FoodOrder {
 
         @Mapper(unmappedTargetPolicy = ReportingPolicy.ERROR)
         interface FoodOrderMapper {
-
             FoodOrderDto toFoodOrderDto(FoodOrder foodOrder);
             FoodOrder toFoodOrder(FoodOrderDto foodOrderDto);
         }

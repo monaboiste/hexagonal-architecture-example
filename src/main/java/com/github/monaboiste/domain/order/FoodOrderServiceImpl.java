@@ -5,7 +5,9 @@ import com.github.monaboiste.domain.order.port.outgoing.FoodOrderDatabase;
 import com.github.monaboiste.domain.order.port.shared.FoodOrderDto;
 import com.github.monaboiste.domain.order.port.shared.FoodOrderState;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RequiredArgsConstructor
 class FoodOrderServiceImpl implements FoodOrderService {
 
@@ -15,7 +17,9 @@ class FoodOrderServiceImpl implements FoodOrderService {
     public Long createOrder(String dishName) {
         FoodOrder.FoodOrderFactory orderFactory = FoodOrder.FoodOrderFactory.getInstance();
         FoodOrder order = orderFactory.createOrder(dishName);
+        log.info("Creating order: {} id {}", order.getDishName(), order.getId());
         foodOrderDatabase.save(orderFactory.from(order));
+        log.info("Order: {} id {} has been saved", order.getDishName(), order.getId());
         return order.getId();
     }
 

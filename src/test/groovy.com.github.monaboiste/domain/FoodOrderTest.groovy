@@ -12,7 +12,7 @@ class FoodOrderTest extends Specification {
             FoodOrderFacade foodOrderFacade = new FoodOrderFacade(new InMemoryFoodOrderDatabase())
             FoodOrderService foodOrderService = foodOrderFacade.getFoodOrderService()
         when:
-            Long orderId = foodOrderService.createOrder("burder")
+            Long orderId = foodOrderService.createOrder("burger")
             FoodOrderState orderState = foodOrderService.getOrderState(orderId)
         then:
             orderId == 1L
