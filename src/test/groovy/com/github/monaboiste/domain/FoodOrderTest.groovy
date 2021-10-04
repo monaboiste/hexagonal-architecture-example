@@ -7,15 +7,17 @@ import spock.lang.Specification
 
 class FoodOrderTest extends Specification {
 
-    def "should create a order"() {
+    def "should create a new order"() {
         given:
-            FoodOrderFacade foodOrderFacade = new FoodOrderFacade(new InMemoryFoodOrderDatabase())
-            FoodOrderService foodOrderService = foodOrderFacade.getFoodOrderService()
+            def dishName = "pizza"
+            def address = "ul. Wojska Polskiego 12/4, 66-555 Warszawa"
+            def foodOrderFacade = new FoodOrderFacade(new InMemoryFoodOrderDatabase())
+            def foodOrderService = foodOrderFacade.getFoodOrderService()
         when:
-            Long orderId = foodOrderService.createOrder("burger")
-            FoodOrderState orderState = foodOrderService.getOrderState(orderId)
+            def orderId = foodOrderService.createOrder(dishName, address)
+            def orderState = foodOrderService.getOrderState(orderId)
         then:
-            orderId == 1L
-            orderState == FoodOrderState.NEW
+            assert orderId == 1L
+            assert orderState == FoodOrderState.NEW
     }
 }
