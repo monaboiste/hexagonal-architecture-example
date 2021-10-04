@@ -2,8 +2,11 @@ package com.github.monaboiste.infrastructure.spring.domain.order.adapter.outgoin
 
 import com.github.monaboiste.domain.order.port.outgoing.FoodOrderDatabase;
 import com.github.monaboiste.domain.order.port.shared.FoodOrderDto;
+import com.github.monaboiste.domain.order.port.shared.FoodOrderState;
 
+import java.util.Collection;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 public class InMemoryFoodOrderDatabase implements FoodOrderDatabase {
     private final ConcurrentHashMap<Long, FoodOrderDto> db
@@ -17,5 +20,12 @@ public class InMemoryFoodOrderDatabase implements FoodOrderDatabase {
     @Override
     public FoodOrderDto findById(Long orderId) {
         return db.get(orderId);
+    }
+
+    @Override
+    public Collection<FoodOrderDto> findByState(FoodOrderState state) {
+        return db.values().stream()
+                .filter((final var dto) -> dto.getState() == state)
+                .collect(Collectors.toList());
     }
 }

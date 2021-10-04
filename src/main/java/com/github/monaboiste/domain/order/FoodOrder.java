@@ -13,6 +13,11 @@ import org.mapstruct.factory.Mappers;
 
 import java.util.concurrent.atomic.AtomicLong;
 
+/**
+ * FoodOrder domain:
+ * - takes the orders
+ * - orchestrates the process of food preparation
+ */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
@@ -21,7 +26,17 @@ class FoodOrder {
 
     private Long id;
     private String dishName;
+    private String address;
     private FoodOrderState state;
+
+    void changeState(FoodOrderState newOrderState) {
+        if (state.ordinal() < newOrderState.ordinal()) {
+            state = newOrderState;
+        } else {
+            throw new IllegalStateException(String.format(
+                    "Cannot change status from [%s] to [%s]", state, newOrderState));
+        }
+    }
 
     static class FoodOrderFactory {
 
@@ -31,9 +46,9 @@ class FoodOrder {
 
         private final FoodOrderMapper foodOrderMapper = Mappers.getMapper(FoodOrderMapper.class);
 
-        FoodOrder createOrder(String dishName) {
+        FoodOrder createOrder(String dishName, String address) {
             Long orderId = SEQUENCE.getAndIncrement();
-            return new FoodOrder(orderId, dishName, FoodOrderState.NEW);
+            return new FoodOrder(orderId, dishName, address, FoodOrderState.NEW);
         }
 
         FoodOrder from(FoodOrderDto foodOrderDto) {

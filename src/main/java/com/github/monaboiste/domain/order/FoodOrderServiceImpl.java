@@ -14,12 +14,14 @@ class FoodOrderServiceImpl implements FoodOrderService {
     private final FoodOrderDatabase foodOrderDatabase;
 
     @Override
-    public Long createOrder(String dishName) {
+    public Long createOrder(String dishName, String address) {
         FoodOrder.FoodOrderFactory orderFactory = FoodOrder.FoodOrderFactory.getInstance();
-        FoodOrder order = orderFactory.createOrder(dishName);
+        FoodOrder order = orderFactory.createOrder(dishName, address);
+
         log.info("Creating order: {} id {}", order.getDishName(), order.getId());
         foodOrderDatabase.save(orderFactory.from(order));
         log.info("Order: {} id {} has been saved", order.getDishName(), order.getId());
+
         return order.getId();
     }
 
@@ -28,5 +30,16 @@ class FoodOrderServiceImpl implements FoodOrderService {
         FoodOrderDto orderDto = foodOrderDatabase.findById(orderId);
         // TODO: throw if not exists
         return orderDto.getState();
+    }
+
+    @Override
+    public void changeOrderState(Long orderId, FoodOrderState state) {
+        FoodOrderDto orderDto = foodOrderDatabase.findById(orderId);
+
+        FoodOrder.FoodOrderFactory orderFactory = FoodOrder.FoodOrderFactory.getInstance();
+        FoodOrder order = orderFactory.from(orderDto);
+
+        order.changeState(state);
+        foodOrderDatabase.save(orderFactory.from(order));
     }
 }

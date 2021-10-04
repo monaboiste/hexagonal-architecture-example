@@ -10,7 +10,7 @@ import org.springframework.context.ApplicationContext;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-class FoodOrderAppIT {
+class FoodOrderIT {
 
     @Autowired
     private ApplicationContext applicationContext;
@@ -27,8 +27,9 @@ class FoodOrderAppIT {
     void shouldCreateNewOrder() {
         // given
         String dishName = "pizza";
+        String address = "ul. Wojska Polskiego 12/4, 66-555 Warszawa";
         // when
-        Long orderId = foodOrderService.createOrder(dishName);
+        Long orderId = foodOrderService.createOrder(dishName, address);
         FoodOrderState orderState = foodOrderService.getOrderState(orderId);
         // then
         assertThat(orderId).isEqualTo(1L);
