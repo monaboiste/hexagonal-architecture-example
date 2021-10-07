@@ -1,6 +1,6 @@
 package com.github.monaboiste.domain.delivery.port.incoming;
 
-public interface DeliveryService {
+public interface DeliveryCommandService {
 
     void deliver(Long foodOrderId);
 }
