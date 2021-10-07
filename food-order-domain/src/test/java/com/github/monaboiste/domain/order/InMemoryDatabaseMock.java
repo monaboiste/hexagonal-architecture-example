@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
-public class InMemoryDatabaseMock implements FoodOrderDatabase {
+class InMemoryDatabaseMock implements FoodOrderDatabase {
 
     private final ConcurrentHashMap<Long, FoodOrderDto> db
             = new ConcurrentHashMap<>();

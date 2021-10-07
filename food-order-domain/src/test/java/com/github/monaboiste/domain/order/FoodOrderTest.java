@@ -1,19 +1,24 @@
 package com.github.monaboiste.domain.order;
 
-import com.github.monaboiste.domain.order.port.incoming.FoodOrderService;
 import com.github.monaboiste.domain.order.port.outgoing.FoodOrderDatabase;
 import com.github.monaboiste.domain.order.port.shared.FoodOrderState;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class FoodOrderTest {
 
-    private final FoodOrderDatabase foodOrderDatabase
-            = new InMemoryDatabaseMock();
-    private final FoodOrderService foodOrderService
-            = new FoodOrderServiceImpl(foodOrderDatabase);
+    private final LogisticsMock logistics = new LogisticsMock();
+    private final FoodOrderDatabase foodOrderDatabase = new InMemoryDatabaseMock();
+    private final FoodOrderFacade foodOrderFacade = new FoodOrderFacade(foodOrderDatabase, logistics);
+
+    @BeforeEach
+    void setUp() {
+        // TEMPORARY
+        logistics.setFoodOrderFacade(foodOrderFacade);
+    }
 
     @AfterEach
     void tearDown() {
@@ -24,12 +29,37 @@ class FoodOrderTest {
     void shouldCreateNewOrder() {
         // given
         String dishName = "pizza";
-        String address = "ul. Wojska Polskiego 12/4, 66-555 Warszawa";
+        String address = "ul. Wonka Policies 12/4, 66-555 Warsaw";
         // when
-        Long orderId = foodOrderService.createOrder(dishName, address);
-        FoodOrderState orderState = foodOrderService.getOrderState(orderId);
+        Long orderId = foodOrderFacade.getFoodOrderCommandService()
+                .createOrder(dishName, address);
+        FoodOrderState orderState = foodOrderFacade.getFoodOrderQueryService()
+                .findById(orderId).getState();
         // then
-        assertThat(orderId).isEqualTo(1L);
+        assertThat(orderId).isNotZero();
         assertThat(orderState).isEqualTo(FoodOrderState.NEW);
+    }
+
+    @Test
+    void shouldCorrectlyTransitionBetweenOrderStates() {
+        // given
+        String dishName = "pizza";
+        String address = "ul. Wonka Policies 12/4, 66-555 Warsaw";
+        // when
+        Long orderId = foodOrderFacade.getFoodOrderCommandService()
+                .createOrder(dishName, address);
+        // then
+        assertThat(foodOrderFacade.getFoodOrderQueryService().findById(orderId).getState())
+                .isEqualTo(FoodOrderState.NEW);
+        // and when cron is triggered and restaurant sends markAsOnTheWay command
+        foodOrderFacade.getFoodOrderCommandService().scheduleOrders();
+        // then
+        assertThat(foodOrderFacade.getFoodOrderQueryService().findById(orderId).getState())
+                .isEqualTo(FoodOrderState.ON_THE_WAY);
+        // and when cron is triggered and delivery sends markAsDelivered command
+        foodOrderFacade.getFoodOrderCommandService().scheduleOrders();
+        // then
+        assertThat(foodOrderFacade.getFoodOrderQueryService().findById(orderId).getState())
+                .isEqualTo(FoodOrderState.DELIVERED);
     }
 }

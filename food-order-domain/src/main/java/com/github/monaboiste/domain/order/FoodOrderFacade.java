@@ -1,19 +1,25 @@
 package com.github.monaboiste.domain.order;
 
-import com.github.monaboiste.domain.order.port.incoming.CronService;
-import com.github.monaboiste.domain.order.port.incoming.FoodOrderService;
+import com.github.monaboiste.domain.order.port.incoming.FoodOrderCommandService;
+import com.github.monaboiste.domain.order.port.incoming.FoodOrderQueryService;
 import com.github.monaboiste.domain.order.port.outgoing.FoodOrderDatabase;
 import com.github.monaboiste.domain.order.port.outgoing.Logistics;
 import lombok.Getter;
 
+/**
+ * Facade takes secondary ports and return primary ports.
+ */
 @Getter
 public class FoodOrderFacade {
 
-    private final FoodOrderService foodOrderService;
-    private final CronService cronService;
+    private final FoodOrderCommandService foodOrderCommandService;
+    private final FoodOrderQueryService foodOrderQueryService;
 
-    public FoodOrderFacade(FoodOrderDatabase foodOrderDatabase, Logistics logistics) {
-        this.foodOrderService = new FoodOrderServiceImpl(foodOrderDatabase);
-        this.cronService = new CronServiceImpl(foodOrderDatabase, logistics);
+    public FoodOrderFacade(FoodOrderDatabase foodOrderDatabase,
+                           Logistics logistics) {
+        this.foodOrderCommandService
+                = new FoodOrderCommandServiceImpl(foodOrderDatabase, logistics);
+        this.foodOrderQueryService
+                = new FoodOrderQueryServiceImpl(foodOrderDatabase);
     }
 }

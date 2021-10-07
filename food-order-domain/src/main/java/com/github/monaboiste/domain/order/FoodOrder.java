@@ -29,6 +29,8 @@ class FoodOrder {
     private String address;
     private FoodOrderState state;
 
+    // TODO: [NOSONAR] implement proper state machine,
+    //  check transition between states.
     void changeState(FoodOrderState newOrderState) {
         if (state.ordinal() < newOrderState.ordinal()) {
             state = newOrderState;
