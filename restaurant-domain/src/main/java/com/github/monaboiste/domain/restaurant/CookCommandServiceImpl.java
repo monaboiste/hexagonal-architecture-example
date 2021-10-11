@@ -1,6 +1,6 @@
 package com.github.monaboiste.domain.restaurant;
 
-import com.github.monaboiste.domain.restaurant.port.incoming.RestaurantService;
+import com.github.monaboiste.domain.restaurant.port.incoming.CookCommandService;
 import com.github.monaboiste.domain.restaurant.port.outcoming.FoodOrderDetails;
 import com.github.monaboiste.domain.restaurant.port.outcoming.FoodOrderNotifier;
 import com.github.monaboiste.domain.restaurant.port.shared.FoodOrderDetailsDto;
@@ -9,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @RequiredArgsConstructor
 @Slf4j
-class RestaurantServiceImpl implements RestaurantService {
+class CookCommandServiceImpl implements CookCommandService {
 
     private final FoodOrderDetails foodOrderDetails;
     private final FoodOrderNotifier foodOrderNotifier;

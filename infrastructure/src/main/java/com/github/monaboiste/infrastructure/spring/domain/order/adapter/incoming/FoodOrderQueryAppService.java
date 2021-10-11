@@ -1,7 +1,7 @@
 package com.github.monaboiste.infrastructure.spring.domain.order.adapter.incoming;
 
 import com.github.monaboiste.domain.order.FoodOrderFacade;
-import com.github.monaboiste.domain.order.port.incoming.FoodOrderCommandService;
+import com.github.monaboiste.domain.order.port.incoming.FoodOrderQueryService;
 import lombok.experimental.Delegate;
 import org.springframework.stereotype.Service;
 
@@ -12,12 +12,12 @@ import org.springframework.stereotype.Service;
  * add @Transactional to the services' methods.
  */
 @Service
-class FoodOrderAppDomainCommandService implements FoodOrderCommandService {
+public class FoodOrderQueryAppService implements FoodOrderQueryService {
 
     @Delegate
-    private final FoodOrderCommandService foodOrderCommandServiceDelegate;
+    private final FoodOrderQueryService foodOrderQueryServiceDelegate;
 
-    public FoodOrderAppDomainCommandService(FoodOrderFacade foodOrderFacade) {
-        this.foodOrderCommandServiceDelegate = foodOrderFacade.getFoodOrderCommandService();
+    public FoodOrderQueryAppService(FoodOrderFacade foodOrderFacade) {
+        this.foodOrderQueryServiceDelegate = foodOrderFacade.getFoodOrderQueryService();
     }
 }

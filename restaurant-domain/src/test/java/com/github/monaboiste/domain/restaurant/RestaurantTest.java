@@ -15,7 +15,7 @@ class RestaurantTest {
     @Test
     void shouldNotificationWhenOrderIsReady() {
         // when
-        restaurantFacade.getRestaurantService().prepareOrder(1L);
+        restaurantFacade.getCookCommandService().prepareOrder(1L);
         // then
         assertThat(foodOrderNotifier.wasNotificationSent()).isTrue();
     }

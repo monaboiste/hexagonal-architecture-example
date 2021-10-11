@@ -1,6 +1,6 @@
 package com.github.monaboiste.domain.restaurant;
 
-import com.github.monaboiste.domain.restaurant.port.incoming.RestaurantService;
+import com.github.monaboiste.domain.restaurant.port.incoming.CookCommandService;
 import com.github.monaboiste.domain.restaurant.port.outcoming.FoodOrderDetails;
 import com.github.monaboiste.domain.restaurant.port.outcoming.FoodOrderNotifier;
 import lombok.Getter;
@@ -8,10 +8,10 @@ import lombok.Getter;
 @Getter
 public class RestaurantFacade {
 
-    private final RestaurantService restaurantService;
+    private final CookCommandService cookCommandService;
 
     public RestaurantFacade(FoodOrderDetails foodOrderDetails,
                             FoodOrderNotifier foodOrderNotifier) {
-        this.restaurantService = new RestaurantServiceImpl(foodOrderDetails, foodOrderNotifier);
+        this.cookCommandService = new CookCommandServiceImpl(foodOrderDetails, foodOrderNotifier);
     }
 }

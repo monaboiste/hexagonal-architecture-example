@@ -11,7 +11,7 @@ class FoodOrderNotifierMock implements FoodOrderNotifier {
     private boolean wasNotificationSent = false;
 
     @Override
-    public void onOrderReady(Long orderId) {
+    public void onOrderReady(Long foodOrderId) {
         wasNotificationSent = true;
     }
 }

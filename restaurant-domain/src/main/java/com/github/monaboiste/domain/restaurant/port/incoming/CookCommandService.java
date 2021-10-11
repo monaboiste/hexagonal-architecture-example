@@ -1,6 +1,6 @@
 package com.github.monaboiste.domain.restaurant.port.incoming;
 
-public interface RestaurantService {
+public interface CookCommandService {
 
     void prepareOrder(Long foodOrderId);
 }

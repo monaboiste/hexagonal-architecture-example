@@ -1,16 +1,18 @@
-package com.github.monaboiste.infrastructure.spring.config;
+package com.github.monaboiste.infrastructure.spring.domain.order.config;
 
+import com.github.monaboiste.domain.delivery.port.incoming.DeliveryCommandService;
 import com.github.monaboiste.domain.order.FoodOrderFacade;
 import com.github.monaboiste.domain.order.port.outgoing.FoodOrderDatabase;
 import com.github.monaboiste.domain.order.port.outgoing.Logistics;
+import com.github.monaboiste.domain.restaurant.port.incoming.CookCommandService;
+import com.github.monaboiste.infrastructure.spring.domain.order.adapter.outgoing.DefaultLogistics;
 import com.github.monaboiste.infrastructure.spring.domain.order.adapter.outgoing.InMemoryFoodOrderDatabase;
-import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@Slf4j
-public class AppConfig extends InMemoryFoodOrderDatabase {
+public class FoodOrderDomainConfig {
 
     @Bean
     public FoodOrderFacade foodOrderFacade(FoodOrderDatabase foodOrderDatabase,
@@ -25,19 +27,7 @@ public class AppConfig extends InMemoryFoodOrderDatabase {
     }
 
     @Bean
-    public Logistics foodOrderLogistics() {
-        return new Logistics() {
-
-            @Override
-            public void prepareDish(Long foodOrderId) {
-                log.info("Preparing order: {}", foodOrderId);
-            }
-
-            @Override
-            public void deliver(Long foodOrderId) {
-                log.info("Delivering order: {}", foodOrderId);
-            }
-        };
-
+    public Logistics foodOrderLogistics(ApplicationEventPublisher eventPublisher) {
+        return new DefaultLogistics(eventPublisher);
     }
 }
