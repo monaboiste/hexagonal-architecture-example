@@ -1,18 +1,14 @@
-package com.github.monaboiste.infrastructure.spring.domain.order.config;
+package com.github.monaboiste.infrastructure.spring.domain.order.adapter.outgoing;
 
-import com.github.monaboiste.domain.delivery.port.incoming.DeliveryCommandService;
 import com.github.monaboiste.domain.order.FoodOrderFacade;
 import com.github.monaboiste.domain.order.port.outgoing.FoodOrderDatabase;
 import com.github.monaboiste.domain.order.port.outgoing.Logistics;
-import com.github.monaboiste.domain.restaurant.port.incoming.CookCommandService;
-import com.github.monaboiste.infrastructure.spring.domain.order.adapter.outgoing.DefaultLogistics;
-import com.github.monaboiste.infrastructure.spring.domain.order.adapter.outgoing.InMemoryFoodOrderDatabase;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class FoodOrderDomainConfig {
+class FoodOrderDomainConfig {
 
     @Bean
     public FoodOrderFacade foodOrderFacade(FoodOrderDatabase foodOrderDatabase,

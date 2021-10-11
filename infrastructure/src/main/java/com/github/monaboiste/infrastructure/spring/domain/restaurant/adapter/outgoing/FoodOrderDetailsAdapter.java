@@ -11,7 +11,7 @@ import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
 @RequiredArgsConstructor
-public class FoodOrderDetailsAdapter implements FoodOrderDetails {
+class FoodOrderDetailsAdapter implements FoodOrderDetails {
 
     private static final FoodOrderDetailsMapper MAPPER
             = Mappers.getMapper(FoodOrderDetailsMapper.class);

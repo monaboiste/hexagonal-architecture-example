@@ -2,13 +2,13 @@ package com.github.monaboiste.infrastructure.spring.domain.restaurant.adapter.in
 
 import com.github.monaboiste.domain.restaurant.RestaurantFacade;
 import com.github.monaboiste.domain.restaurant.port.incoming.CookCommandService;
-import com.github.monaboiste.infrastructure.spring.command.PrepareDishCommand;
+import com.github.monaboiste.infrastructure.spring.commandbus.command.PrepareDishCommand;
 import lombok.experimental.Delegate;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CookCommandAppService implements CookCommandService {
+class CookCommandAppService implements CookCommandService {
 
     @Delegate
     private final CookCommandService cookCommandServiceDelegate;

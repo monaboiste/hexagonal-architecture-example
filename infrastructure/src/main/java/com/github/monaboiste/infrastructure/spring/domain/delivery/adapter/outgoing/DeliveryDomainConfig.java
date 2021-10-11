@@ -1,17 +1,15 @@
-package com.github.monaboiste.infrastructure.spring.domain.delivery.config;
+package com.github.monaboiste.infrastructure.spring.domain.delivery.adapter.outgoing;
 
 import com.github.monaboiste.domain.delivery.DeliveryFacade;
 import com.github.monaboiste.domain.delivery.port.outcoming.FoodOrderDetails;
 import com.github.monaboiste.domain.delivery.port.outcoming.FoodOrderNotifier;
 import com.github.monaboiste.domain.order.port.incoming.FoodOrderQueryService;
-import com.github.monaboiste.infrastructure.spring.domain.delivery.adapter.outgoing.FoodOrderDetailsAdapter;
-import com.github.monaboiste.infrastructure.spring.domain.delivery.adapter.outgoing.FoodOrderNotifierAdapter;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class DeliveryDomainConfig {
+class DeliveryDomainConfig {
 
     @Bean
     public DeliveryFacade deliveryFacade(FoodOrderDetails foodOrderDetails,

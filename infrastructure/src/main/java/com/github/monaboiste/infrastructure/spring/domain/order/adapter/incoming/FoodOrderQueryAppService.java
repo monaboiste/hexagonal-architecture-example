@@ -11,8 +11,8 @@ import org.springframework.stereotype.Service;
  * Some services may be overridden here in the future, e.g.
  * add @Transactional to the services' methods.
  */
-@Service
-public class FoodOrderQueryAppService implements FoodOrderQueryService {
+@Service("foodOrderQueryService")
+class FoodOrderQueryAppService implements FoodOrderQueryService {
 
     @Delegate
     private final FoodOrderQueryService foodOrderQueryServiceDelegate;

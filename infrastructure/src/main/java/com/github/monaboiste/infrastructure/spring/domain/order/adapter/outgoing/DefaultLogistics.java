@@ -1,15 +1,15 @@
 package com.github.monaboiste.infrastructure.spring.domain.order.adapter.outgoing;
 
 import com.github.monaboiste.domain.order.port.outgoing.Logistics;
-import com.github.monaboiste.infrastructure.spring.command.DeliverOrderCommand;
-import com.github.monaboiste.infrastructure.spring.command.PrepareDishCommand;
+import com.github.monaboiste.infrastructure.spring.commandbus.command.DeliverOrderCommand;
+import com.github.monaboiste.infrastructure.spring.commandbus.command.PrepareDishCommand;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;
 
 @Slf4j
 @RequiredArgsConstructor
-public class DefaultLogistics implements Logistics {
+class DefaultLogistics implements Logistics {
 
     private final ApplicationEventPublisher eventPublisher;
 

@@ -2,13 +2,13 @@ package com.github.monaboiste.infrastructure.spring.domain.delivery.adapter.inco
 
 import com.github.monaboiste.domain.delivery.DeliveryFacade;
 import com.github.monaboiste.domain.delivery.port.incoming.DeliveryCommandService;
-import com.github.monaboiste.infrastructure.spring.command.DeliverOrderCommand;
+import com.github.monaboiste.infrastructure.spring.commandbus.command.DeliverOrderCommand;
 import lombok.experimental.Delegate;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
 @Service
-public class DeliveryCommandAppService implements DeliveryCommandService {
+class DeliveryCommandAppService implements DeliveryCommandService {
 
     @Delegate
     private final DeliveryCommandService deliveryCommandServiceDelegate;
