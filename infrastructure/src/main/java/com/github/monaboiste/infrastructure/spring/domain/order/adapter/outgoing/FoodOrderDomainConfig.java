@@ -3,7 +3,7 @@ package com.github.monaboiste.infrastructure.spring.domain.order.adapter.outgoin
 import com.github.monaboiste.domain.order.FoodOrderFacade;
 import com.github.monaboiste.domain.order.port.outgoing.FoodOrderDatabase;
 import com.github.monaboiste.domain.order.port.outgoing.Logistics;
-import org.springframework.context.ApplicationEventPublisher;
+import com.github.monaboiste.infrastructure.spring.commandbus.CommandBus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -23,7 +23,7 @@ class FoodOrderDomainConfig {
     }
 
     @Bean
-    public Logistics foodOrderLogistics(ApplicationEventPublisher eventPublisher) {
-        return new DefaultLogistics(eventPublisher);
+    public Logistics foodOrderLogistics(CommandBus commandBus) {
+        return new DefaultLogistics(commandBus);
     }
 }

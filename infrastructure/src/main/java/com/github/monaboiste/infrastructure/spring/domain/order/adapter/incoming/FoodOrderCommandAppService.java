@@ -3,6 +3,7 @@ package com.github.monaboiste.infrastructure.spring.domain.order.adapter.incomin
 import com.github.monaboiste.domain.order.FoodOrderFacade;
 import com.github.monaboiste.domain.order.port.incoming.FoodOrderCommandService;
 import lombok.experimental.Delegate;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
 /**

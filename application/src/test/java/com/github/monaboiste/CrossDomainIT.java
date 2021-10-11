@@ -1,4 +1,4 @@
-package com.monaboiste.github;
+package com.github.monaboiste;
 
 import com.github.monaboiste.domain.order.port.incoming.FoodOrderCommandService;
 import com.github.monaboiste.domain.order.port.incoming.FoodOrderQueryService;
