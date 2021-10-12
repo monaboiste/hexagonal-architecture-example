@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * Exposes domain's services as a spring bean.
- *
+ * <p>
  * Some services may be overridden here in the future, e.g.
  * add @Transactional to the services' methods.
  */

@@ -12,16 +12,10 @@ import org.springframework.stereotype.Service;
 class SpringCommandBus implements CommandBus {
 
     private final ApplicationEventPublisher eventPublisher;
-//    private final CommandHandler commandHandler;
 
     @Override
     public void fire(Command command) {
         log.info("[BUS] Publishing command: {}", command.getClass().getName());
         eventPublisher.publishEvent(command);
     }
-//
-//    @EventListener
-//    public void handle(Command command) {
-//        commandHandler.handle(command);
-//    }
 }

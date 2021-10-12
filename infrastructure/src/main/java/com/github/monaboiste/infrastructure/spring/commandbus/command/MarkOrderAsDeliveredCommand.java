@@ -1,9 +1,8 @@
 package com.github.monaboiste.infrastructure.spring.commandbus.command;
 
-import lombok.Value;
+public class MarkOrderAsDeliveredCommand extends Command {
 
-@Value
-public class MarkOrderAsDeliveredCommand implements Command {
-
-    Long foodOrderId;
+    public MarkOrderAsDeliveredCommand(Long orderId) {
+        super(orderId);
+    }
 }

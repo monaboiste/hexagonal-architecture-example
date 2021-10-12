@@ -1,53 +1,36 @@
 package com.github.monaboiste.infrastructure.spring.commandbus;
 
-import com.github.monaboiste.domain.delivery.port.incoming.DeliveryCommandService;
-import com.github.monaboiste.domain.order.port.incoming.FoodOrderCommandService;
-import com.github.monaboiste.domain.restaurant.port.incoming.CookCommandService;
 import com.github.monaboiste.infrastructure.spring.commandbus.command.Command;
-import com.github.monaboiste.infrastructure.spring.commandbus.command.DeliverOrderCommand;
-import com.github.monaboiste.infrastructure.spring.commandbus.command.MarkOrderAsDeliveredCommand;
-import com.github.monaboiste.infrastructure.spring.commandbus.command.MarkOrderAsOnTheWayCommand;
-import com.github.monaboiste.infrastructure.spring.commandbus.command.PrepareDishCommand;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
+
+import java.util.stream.Stream;
 
 @Slf4j
 @Component
 @RequiredArgsConstructor
-class SpringCommandHandler implements CommandHandler {
+class SpringCommandHandler {
 
-    private final FoodOrderCommandService foodOrderCommandService;
-    private final CookCommandService cookCommandService;
-    private final DeliveryCommandService deliveryCommandService;
+    private final ApplicationContext applicationContext;
 
+    @SuppressWarnings("unchecked")
     @EventListener
-    @Override
     public void handle(Command command) {
-        log.info("[HANDLER] Handling command: {}",
-                command.getClass().getName());
+        log.info("[HANDLER] Handling command {} id: {}",
+                command.getClass(), command.getOrderId());
 
-        if (command instanceof PrepareDishCommand) {
-            cookCommandService.prepareOrder(
-                    ((PrepareDishCommand) command).getFoodOrderId());
-            return;
-        } else if (command instanceof MarkOrderAsOnTheWayCommand) {
-            foodOrderCommandService.markAsOnTheWay(
-                    ((MarkOrderAsOnTheWayCommand) command).getFoodOrderId());
-            return;
-        } else if (command instanceof DeliverOrderCommand) {
-            deliveryCommandService.deliver(
-                    ((DeliverOrderCommand) command).getFoodOrderId());
-            return;
-        } else if (command instanceof MarkOrderAsDeliveredCommand) {
-            foodOrderCommandService.markAsDelivered(
-                    ((MarkOrderAsDeliveredCommand) command).getFoodOrderId());
-            return;
-        }
-        throw new UnsupportedOperationException(
-                String.format("Unknown command %s passed to the handler",
-                        command.getClass().getName())
-        );
+        String[] commandHandlersBeanNames = applicationContext.getBeanNamesForType(CommandHandler.class);
+        CommandHandler<Command> commandHandler = Stream.of(commandHandlersBeanNames)
+                .map(name -> applicationContext.getBean(name, CommandHandler.class))
+                .filter(handler -> handler.getHandledClassType() == command.getClass())
+                .findFirst()
+                .orElseThrow(() -> new UnsupportedOperationException(
+                        String.format("Handler for command %s has not been found",
+                                command.getClass())));
+
+        commandHandler.handle(command);
     }
 }

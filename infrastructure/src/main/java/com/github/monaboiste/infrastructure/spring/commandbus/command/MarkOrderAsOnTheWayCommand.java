@@ -1,9 +1,8 @@
 package com.github.monaboiste.infrastructure.spring.commandbus.command;
 
-import lombok.Value;
+public class MarkOrderAsOnTheWayCommand extends Command {
 
-@Value
-public class MarkOrderAsOnTheWayCommand implements Command {
-
-    Long foodOrderId;
+    public MarkOrderAsOnTheWayCommand(Long orderId) {
+        super(orderId);
+    }
 }
