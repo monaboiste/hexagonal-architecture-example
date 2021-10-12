@@ -7,6 +7,10 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+import java.util.Map;
+import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Stream;
 
 @Slf4j
@@ -15,6 +19,17 @@ import java.util.stream.Stream;
 class SpringCommandHandler {
 
     private final ApplicationContext applicationContext;
+    private final Map<Class<?>, CommandHandler> commandHandlerMap = new ConcurrentHashMap<>();
+
+    @PostConstruct
+    private void populateCommandHandlerMap() {
+        String[] commandHandlersBeanNames
+                = applicationContext.getBeanNamesForType(CommandHandler.class);
+        Stream.of(commandHandlersBeanNames)
+                .map(name -> applicationContext.getBean(name, CommandHandler.class))
+                .forEach(handler ->
+                        commandHandlerMap.put(handler.getHandledClassType(), handler));
+    }
 
     @SuppressWarnings("unchecked")
     @EventListener
@@ -22,14 +37,10 @@ class SpringCommandHandler {
         log.info("[HANDLER] Handling command {} id: {}",
                 command.getClass(), command.getOrderId());
 
-        String[] commandHandlersBeanNames = applicationContext.getBeanNamesForType(CommandHandler.class);
-        CommandHandler<Command> commandHandler = Stream.of(commandHandlersBeanNames)
-                .map(name -> applicationContext.getBean(name, CommandHandler.class))
-                .filter(handler -> handler.getHandledClassType() == command.getClass())
-                .findFirst()
+        CommandHandler<Command> commandHandler
+                = Optional.ofNullable(commandHandlerMap.get(command.getClass()))
                 .orElseThrow(() -> new UnsupportedOperationException(
-                        String.format("Handler for command %s has not been found",
-                                command.getClass())));
+                        String.format("Handler for command %s has not been found", command.getClass())));
 
         commandHandler.handle(command);
     }

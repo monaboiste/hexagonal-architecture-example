@@ -11,7 +11,7 @@ public interface CommandHandler<T extends Command> {
 
     @SuppressWarnings("unchecked")
     default Class<T> getHandledClassType() {
-        Class<T> actualTypeArgument = null;
+        Class<T> actualTypeArgument;
         try {
             Type[] genericInterfaces = getClass().getGenericInterfaces();
             ParameterizedType type = (ParameterizedType) genericInterfaces[0];
