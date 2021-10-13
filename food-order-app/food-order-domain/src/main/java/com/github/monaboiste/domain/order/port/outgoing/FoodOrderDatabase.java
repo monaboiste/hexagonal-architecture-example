@@ -8,7 +8,10 @@ import java.util.Collection;
 public interface FoodOrderDatabase {
 
     void removeAll();
+
     void save(FoodOrderDto foodOrderDto);
+
     FoodOrderDto findById(Long orderId);
+
     Collection<FoodOrderDto> findByState(FoodOrderState state);
 }
