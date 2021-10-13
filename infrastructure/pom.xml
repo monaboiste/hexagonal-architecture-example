@@ -19,17 +19,17 @@
     <dependencies>
         <dependency>
             <groupId>com.github.monaboiste</groupId>
-            <artifactId>food-order-domain</artifactId>
+            <artifactId>food-order-app</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.github.monaboiste</groupId>
-            <artifactId>restaurant-domain</artifactId>
+            <artifactId>restaurant-app</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.github.monaboiste</groupId>
-            <artifactId>delivery-domain</artifactId>
+            <artifactId>delivery-app</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

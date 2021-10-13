@@ -10,11 +10,11 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>food-order-domain</module>
-        <module>restaurant-domain</module>
-        <module>delivery-domain</module>
         <module>infrastructure</module>
         <module>application</module>
+        <module>food-order-app</module>
+        <module>restaurant-app</module>
+        <module>delivery-app</module>
     </modules>
 
     <parent>
