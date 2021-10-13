@@ -3,24 +3,17 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>hexagonal-arch-example</artifactId>
+        <artifactId>restaurant-app</artifactId>
         <groupId>com.github.monaboiste</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>food-order-app</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>restaurant-infrastructure</artifactId>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
     </properties>
-
-
-    <modules>
-        <module>food-order-domain</module>
-        <module>food-order-infrastructure</module>
-    </modules>
 
 </project>

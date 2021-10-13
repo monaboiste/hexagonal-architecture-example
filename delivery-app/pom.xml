@@ -19,6 +19,7 @@
 
     <modules>
         <module>delivery-domain</module>
+        <module>delivery-infrastructure</module>
     </modules>
 
 </project>
