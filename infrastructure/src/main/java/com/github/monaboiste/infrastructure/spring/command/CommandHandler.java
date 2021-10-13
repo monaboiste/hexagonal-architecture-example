@@ -1,6 +1,4 @@
-package com.github.monaboiste.infrastructure.spring.commandbus;
-
-import com.github.monaboiste.infrastructure.spring.commandbus.command.Command;
+package com.github.monaboiste.infrastructure.spring.command;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;

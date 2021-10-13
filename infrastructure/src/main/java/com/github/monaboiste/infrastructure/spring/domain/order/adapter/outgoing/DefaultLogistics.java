@@ -1,9 +1,9 @@
 package com.github.monaboiste.infrastructure.spring.domain.order.adapter.outgoing;
 
 import com.github.monaboiste.domain.order.port.outgoing.Logistics;
-import com.github.monaboiste.infrastructure.spring.commandbus.CommandBus;
-import com.github.monaboiste.infrastructure.spring.commandbus.command.DeliverOrderCommand;
-import com.github.monaboiste.infrastructure.spring.commandbus.command.PrepareDishCommand;
+import com.github.monaboiste.infrastructure.spring.command.CommandBus;
+import com.github.monaboiste.infrastructure.spring.domain.delivery.DeliverOrderCommand;
+import com.github.monaboiste.infrastructure.spring.domain.restaurant.PrepareDishCommand;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor

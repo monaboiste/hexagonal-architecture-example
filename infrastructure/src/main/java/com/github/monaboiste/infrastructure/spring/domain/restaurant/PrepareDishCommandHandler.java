@@ -1,8 +1,7 @@
-package com.github.monaboiste.infrastructure.spring.commandbus.commandhandler;
+package com.github.monaboiste.infrastructure.spring.domain.restaurant;
 
 import com.github.monaboiste.domain.restaurant.port.incoming.CookCommandService;
-import com.github.monaboiste.infrastructure.spring.commandbus.CommandHandler;
-import com.github.monaboiste.infrastructure.spring.commandbus.command.PrepareDishCommand;
+import com.github.monaboiste.infrastructure.spring.command.CommandHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

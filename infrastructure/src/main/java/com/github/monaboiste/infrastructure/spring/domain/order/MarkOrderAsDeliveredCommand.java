@@ -1,4 +1,6 @@
-package com.github.monaboiste.infrastructure.spring.commandbus.command;
+package com.github.monaboiste.infrastructure.spring.domain.order;
+
+import com.github.monaboiste.infrastructure.spring.command.Command;
 
 public class MarkOrderAsDeliveredCommand extends Command {
 

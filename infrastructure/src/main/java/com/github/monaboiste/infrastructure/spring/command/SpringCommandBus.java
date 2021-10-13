@@ -1,6 +1,5 @@
-package com.github.monaboiste.infrastructure.spring.commandbus;
+package com.github.monaboiste.infrastructure.spring.command;
 
-import com.github.monaboiste.infrastructure.spring.commandbus.command.Command;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;

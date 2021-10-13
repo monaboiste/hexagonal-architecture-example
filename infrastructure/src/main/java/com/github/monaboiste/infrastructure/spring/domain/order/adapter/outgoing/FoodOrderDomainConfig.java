@@ -3,7 +3,7 @@ package com.github.monaboiste.infrastructure.spring.domain.order.adapter.outgoin
 import com.github.monaboiste.domain.order.FoodOrderFacade;
 import com.github.monaboiste.domain.order.port.outgoing.FoodOrderDatabase;
 import com.github.monaboiste.domain.order.port.outgoing.Logistics;
-import com.github.monaboiste.infrastructure.spring.commandbus.CommandBus;
+import com.github.monaboiste.infrastructure.spring.command.CommandBus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

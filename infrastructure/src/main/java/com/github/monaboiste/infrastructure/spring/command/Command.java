@@ -1,4 +1,4 @@
-package com.github.monaboiste.infrastructure.spring.commandbus.command;
+package com.github.monaboiste.infrastructure.spring.command;
 
 import lombok.AccessLevel;
 import lombok.Getter;

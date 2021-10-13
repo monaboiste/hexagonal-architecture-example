@@ -1,8 +1,7 @@
-package com.github.monaboiste.infrastructure.spring.commandbus.commandhandler;
+package com.github.monaboiste.infrastructure.spring.domain.delivery;
 
 import com.github.monaboiste.domain.delivery.port.incoming.DeliveryCommandService;
-import com.github.monaboiste.infrastructure.spring.commandbus.CommandHandler;
-import com.github.monaboiste.infrastructure.spring.commandbus.command.DeliverOrderCommand;
+import com.github.monaboiste.infrastructure.spring.command.CommandHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
