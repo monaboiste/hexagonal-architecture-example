@@ -18,9 +18,12 @@ import java.util.stream.Stream;
 class SpringCommandHandler {
 
     private final ApplicationContext applicationContext;
-    private final Map<Class<?>, CommandHandler> commandHandlerMap = new ConcurrentHashMap<>();
+
+    private final Map<Class<?>, CommandHandler<Command>> commandHandlerMap
+            = new ConcurrentHashMap<>();
 
     @PostConstruct
+    @SuppressWarnings("unchecked")
     private void populateCommandHandlerMap() {
         String[] commandHandlersBeanNames
                 = applicationContext.getBeanNamesForType(CommandHandler.class);
@@ -30,7 +33,6 @@ class SpringCommandHandler {
                         commandHandlerMap.put(handler.getHandledClassType(), handler));
     }
 
-    @SuppressWarnings("unchecked")
     @EventListener
     public void handle(Command command) {
         log.info("[HANDLER] Handling command {} id: {}",
@@ -39,7 +41,8 @@ class SpringCommandHandler {
         CommandHandler<Command> commandHandler
                 = Optional.ofNullable(commandHandlerMap.get(command.getClass()))
                 .orElseThrow(() -> new UnsupportedOperationException(
-                        String.format("Handler for command %s has not been found", command.getClass())));
+                        String.format("Handler for command %s has not been found",
+                                command.getClass())));
 
         commandHandler.handle(command);
     }
