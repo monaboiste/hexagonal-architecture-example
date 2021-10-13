@@ -1,4 +1,4 @@
-package com.github.monaboiste.infrastructure.spring.command;
+package com.github.monaboiste.spring;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;

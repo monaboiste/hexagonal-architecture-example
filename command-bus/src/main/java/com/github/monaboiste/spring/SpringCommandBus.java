@@ -1,4 +1,4 @@
-package com.github.monaboiste.infrastructure.spring.command;
+package com.github.monaboiste.spring;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
